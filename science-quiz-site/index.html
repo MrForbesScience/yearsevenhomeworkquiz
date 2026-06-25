@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Science Lab Health and Safety MCQ Quiz</title>
+  <style>
+    :root {
+      --navy: #142852;
+      --blue: #1f5f9f;
+      --green: #2f8a2f;
+      --light-blue: #eaf4ff;
+      --light-green: #edf8ea;
+      --ink: #20242a;
+      --line: #c9d5e2;
+      --red: #c83737;
+      --gold: #ffd94d;
+      --page: #f6fbff;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f3f9ff 0%, #ffffff 52%, #f2faef 100%);
+    }
+
+    main {
+      width: min(1180px, calc(100% - 28px));
+      margin: 18px auto 28px;
+      border: 3px solid var(--blue);
+      background: var(--white);
+      padding: 22px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 84px 1fr 84px;
+      align-items: center;
+      gap: 18px;
+      border: 3px solid var(--blue);
+      border-radius: 8px;
+      padding: 14px 18px 10px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      text-align: center;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 4px solid var(--green);
+      color: var(--green);
+      font-size: 1.15rem;
+      font-weight: 700;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      width: 68px;
+      height: 68px;
+      border: 3px solid var(--green);
+      border-radius: 50%;
+      background: var(--light-green);
+      justify-self: center;
+    }
+
+    .icon svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--blue);
+      stroke-width: 2.6;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .panel {
+      border: 2px solid var(--green);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--light-green);
+      min-height: 130px;
+    }
+
+    .panel:nth-child(2) {
+      border-color: var(--blue);
+      background: var(--light-blue);
+    }
+
+    .panel h2 {
+      margin: 0;
+      padding: 8px 12px;
+      color: var(--white);
+      background: var(--green);
+      text-align: center;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+    }
+
+    .panel:nth-child(2) h2 {
+      background: var(--blue);
+    }
+
+    .panel-content {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      line-height: 1.35;
+      font-size: 0.98rem;
+    }
+
+    .mini-icon {
+      width: 48px;
+      height: 48px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      background: var(--white);
+      font-weight: 800;
+    }
+
+    .quiz-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 16px;
+      align-items: start;
+      margin-top: 16px;
+    }
+
+    .student-panel {
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) minmax(180px, 1fr) minmax(120px, 0.6fr) auto;
+      gap: 12px;
+      align-items: end;
+      margin-top: 16px;
+      border: 2px solid var(--blue);
+      border-radius: 8px;
+      background: var(--light-blue);
+      padding: 14px;
+    }
+
+    .field label {
+      display: block;
+      color: var(--navy);
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      min-height: 42px;
+      border: 2px solid #9bb5ce;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font: inherit;
+      background: var(--white);
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--blue);
+      outline: 3px solid rgba(31, 95, 159, 0.18);
+    }
+
+    .student-message {
+      grid-column: 1 / -1;
+      min-height: 20px;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .quiz-locked .quiz,
+    .quiz-locked .score-card {
+      opacity: 0.58;
+    }
+
+    .quiz-locked button.answer,
+    .quiz-locked #check,
+    .quiz-locked #retry {
+      cursor: not-allowed;
+    }
+
+    .quiz {
+      border: 2px solid var(--blue);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .section-title {
+      margin: 0;
+      padding: 10px 14px;
+      color: var(--white);
+      background: var(--blue);
+      font-size: 1.2rem;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .questions {
+      padding: 12px;
+    }
+
+    .question {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 6px 12px;
+    }
+
+    .question:last-child {
+      border-bottom: 0;
+    }
+
+    .question h3 {
+      margin: 0 0 9px;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    .answers {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    button.answer {
+      min-height: 42px;
+      border: 2px solid #b7c7d8;
+      border-radius: 7px;
+      background: #ffffff;
+      color: var(--ink);
+      text-align: left;
+      font: inherit;
+      padding: 9px 10px;
+      cursor: pointer;
+    }
+
+    button.answer:hover,
+    button.answer:focus-visible {
+      border-color: var(--blue);
+      background: var(--light-blue);
+      outline: none;
+    }
+
+    button.answer.correct {
+      border-color: var(--green);
+      background: #dff3db;
+      font-weight: 700;
+    }
+
+    button.answer.incorrect {
+      border-color: var(--red);
+      background: #ffe9e9;
+    }
+
+    .feedback {
+      min-height: 20px;
+      margin-top: 8px;
+      color: var(--navy);
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .score-card,
+    .remember,
+    .bitesize-card {
+      border: 2px solid var(--green);
+      border-radius: 8px;
+      background: var(--light-green);
+      overflow: hidden;
+    }
+
+    .score-card h2,
+    .remember h2,
+    .bitesize-card h2 {
+      margin: 0;
+      padding: 10px 12px;
+      color: var(--white);
+      background: var(--green);
+      text-align: center;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+    }
+
+    .bitesize-card {
+      border-color: var(--blue);
+      background: var(--light-blue);
+    }
+
+    .bitesize-card h2 {
+      background: var(--blue);
+    }
+
+    .bitesize-link {
+      display: block;
+      margin: 14px;
+      border: 2px solid var(--blue);
+      border-radius: 7px;
+      background: var(--white);
+      color: var(--navy);
+      padding: 11px 12px;
+      font-weight: 800;
+      text-decoration: none;
+      line-height: 1.3;
+    }
+
+    .bitesize-link:hover,
+    .bitesize-link:focus-visible {
+      background: var(--light-blue);
+      outline: 3px solid rgba(31, 95, 159, 0.18);
+    }
+
+    .score-body {
+      padding: 18px;
+      text-align: center;
+    }
+
+    .score-number {
+      color: var(--navy);
+      font-size: 3.4rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .score-label {
+      margin-top: 6px;
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .round-feedback {
+      margin-top: 13px;
+      border: 2px solid var(--blue);
+      border-radius: 7px;
+      background: var(--light-blue);
+      padding: 11px;
+      text-align: left;
+      line-height: 1.35;
+      font-size: 0.95rem;
+    }
+
+    .round-feedback strong {
+      color: var(--navy);
+    }
+
+    .round-feedback ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .round-feedback:empty {
+      display: none;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .primary,
+    .secondary {
+      border: 0;
+      border-radius: 7px;
+      color: var(--white);
+      background: var(--blue);
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .secondary {
+      background: var(--green);
+    }
+
+    .primary:disabled,
+    .secondary:disabled,
+    button.answer:disabled {
+      opacity: 0.58;
+      cursor: not-allowed;
+      filter: grayscale(0.2);
+    }
+
+    .primary:hover,
+    .secondary:hover,
+    .primary:focus-visible,
+    .secondary:focus-visible {
+      filter: brightness(0.92);
+      outline: 3px solid rgba(31, 95, 159, 0.2);
+    }
+
+    .remember-content {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      line-height: 1.4;
+    }
+
+    .hazard {
+      width: 52px;
+      height: 46px;
+      position: relative;
+    }
+
+    .hazard::before {
+      content: "";
+      position: absolute;
+      inset: 2px 5px;
+      background: var(--gold);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      border: 2px solid var(--ink);
+    }
+
+    .hazard::after {
+      content: "!";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 15px;
+      text-align: center;
+      color: var(--ink);
+      font-size: 1.6rem;
+      font-weight: 900;
+    }
+
+    .progress {
+      height: 12px;
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      background: #ffffff;
+      overflow: hidden;
+      margin-top: 13px;
+    }
+
+    .progress span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background: var(--green);
+      transition: width 0.25s ease;
+    }
+
+    @media (max-width: 860px) {
+      main {
+        width: min(100% - 16px, 700px);
+        padding: 12px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero .icon {
+        display: none;
+      }
+
+      .info-grid,
+      .student-panel,
+      .quiz-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .answers {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      main {
+        width: 100%;
+        margin: 0;
+        border-width: 2px;
+      }
+
+      button.answer {
+        color: #000000;
+      }
+
+      .controls {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <path d="M22 6h20"></path>
+          <path d="M26 6v18L14 54h36L38 24V6"></path>
+          <path d="M21 43h22"></path>
+          <circle cx="27" cy="38" r="3" fill="#2f8a2f" stroke="none"></circle>
+          <circle cx="37" cy="34" r="3" fill="#2f8a2f" stroke="none"></circle>
+        </svg>
+      </div>
+      <div>
+        <h1 id="page-title">Year 7 Science<br>MCQ Quizzes</h1>
+        <div class="subtitle">Choose a week, answer carefully, improve your score.</div>
+      </div>
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <path d="M7 34c7-8 16-10 25-8 9-2 18 0 25 8"></path>
+          <rect x="9" y="32" width="21" height="12" rx="6"></rect>
+          <rect x="34" y="32" width="21" height="12" rx="6"></rect>
+          <path d="M30 38h4"></path>
+        </svg>
+      </div>
+    </section>
+
+    <section class="info-grid" aria-label="Key information">
+      <article class="panel">
+        <h2>Choose</h2>
+        <div class="panel-content">
+          <div class="mini-icon" aria-hidden="true">1</div>
+          <p>Select the weekly quiz your teacher has asked you to complete.</p>
+        </div>
+      </article>
+      <article class="panel">
+        <h2>Answer</h2>
+        <div class="panel-content">
+          <div class="hazard" aria-hidden="true"></div>
+          <p>Enter your name, answer each question, then check your score.</p>
+        </div>
+      </article>
+      <article class="panel">
+        <h2>Improve</h2>
+        <div class="panel-content">
+          <div class="mini-icon" aria-hidden="true">?</div>
+          <p>If you do not get full marks, use the feedback and try the missed questions again.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="student-panel" aria-label="Student details">
+      <div class="field">
+        <label for="quiz-select">Choose quiz</label>
+        <select id="quiz-select">
+          <option value="week1">Week 1 - Lab Safety</option>
+          <option value="week2">Week 2 - Cells</option>
+          <option value="week3">Week 3 - Working Scientifically</option>
+          <option value="week4">Week 4 - Specialised Cells</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="student-name">Student name</label>
+        <input id="student-name" autocomplete="name" required placeholder="Type your full name">
+      </div>
+      <div class="field">
+        <label for="student-class">Class</label>
+        <input id="student-class" autocomplete="off" placeholder="Optional">
+      </div>
+      <button class="primary" type="button" id="start-quiz">Start quiz</button>
+      <div class="student-message" id="student-message">Enter your name to unlock the quiz.</div>
+    </section>
+
+    <section class="quiz-shell quiz-locked" id="quiz-shell">
+      <section class="quiz" aria-labelledby="quiz-title">
+        <h2 class="section-title" id="quiz-title">Week 1 - Lab Safety</h2>
+        <div class="questions" id="questions"></div>
+      </section>
+
+      <aside class="side">
+        <section class="score-card" aria-live="polite">
+          <h2>Score</h2>
+          <div class="score-body">
+            <div class="score-number"><span id="score">0</span>/<span id="total">10</span></div>
+            <div class="score-label" id="score-label">Have a go</div>
+            <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+            <div class="controls">
+              <button class="primary" type="button" id="check">Check all</button>
+              <button class="secondary" type="button" id="retry" hidden>Try missed questions</button>
+              <button class="primary" type="button" id="send-result" hidden>Send result to teacher</button>
+              <button class="secondary" type="button" id="reset">Reset</button>
+            </div>
+            <div class="round-feedback" id="round-feedback"></div>
+          </div>
+        </section>
+
+        <section class="remember">
+          <h2>Remember</h2>
+          <div class="remember-content">
+            <div class="mini-icon" aria-hidden="true">!</div>
+            <p>After checking answers, send your result to your teacher.</p>
+          </div>
+        </section>
+
+        <section class="bitesize-card">
+          <h2>BBC Bitesize</h2>
+          <a class="bitesize-link" id="bitesize-link" href="https://www.bbc.co.uk/bitesize/search?q=KS3%20Year%207%20science%20lab%20safety" target="_blank" rel="noopener">KS3 Year 7 lab safety revision</a>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const quizzes = {
+      week1: {
+        title: "Week 1 - Lab Safety",
+        exportTitle: "Week 1 Lab Safety",
+        motto: "Think safe - act safe - be safe.",
+        bitesizeText: "BBC Bitesize: Lab safety",
+        bitesizeUrl: "https://www.bbc.co.uk/bitesize/articles/z794g7h",
+        questions: [
+      {
+        question: "What should you wear when told to protect your eyes?",
+        options: ["Trainers", "Safety goggles", "A scarf", "A watch"],
+        answer: 1,
+        feedback: "Safety goggles protect your eyes from splashes and small pieces of material."
+      },
+      {
+        question: "Why is eating not allowed in the science lab?",
+        options: ["It is noisy", "Food could be contaminated", "It is too quick", "It uses equipment"],
+        answer: 1,
+        feedback: "Food and drink can pick up unsafe substances from hands, benches or equipment."
+      },
+      {
+        question: "What should you do if glass breaks?",
+        options: ["Hide it", "Tell the teacher", "Pick it up quickly", "Leave the room"],
+        answer: 1,
+        feedback: "Tell the teacher so it can be cleared up safely."
+      },
+      {
+        question: "Which of these is a hazard?",
+        options: ["A pencil case", "A hot tripod", "A timetable", "A reading book"],
+        answer: 1,
+        feedback: "Hot equipment can cause burns, so it is a hazard."
+      },
+      {
+        question: "What should long hair be during practical work?",
+        options: ["Dyed", "Covered in gel", "Tied back", "Washed"],
+        answer: 2,
+        feedback: "Long hair should be tied back so it does not catch fire or get caught."
+      },
+      {
+        question: "If you are unsure about an instruction, what should you do?",
+        options: ["Guess", "Ask the teacher", "Copy a friend", "Run to the sink"],
+        answer: 1,
+        feedback: "Asking the teacher keeps the practical safe and fair."
+      },
+      {
+        question: "Where should bags be kept in a science lab?",
+        options: ["On benches", "In walkways", "Away safely", "By flames"],
+        answer: 2,
+        feedback: "Bags should be stored safely so nobody trips over them."
+      },
+      {
+        question: "What can a flame cause?",
+        options: ["Burns", "Louder sound", "Better writing", "No change"],
+        answer: 0,
+        feedback: "Flames and hot equipment can cause burns."
+      },
+      {
+        question: "Which behaviour is safest in the lab?",
+        options: ["Running", "Pushing", "Walking calmly", "Shouting"],
+        answer: 2,
+        feedback: "Walking calmly helps prevent spills, trips and accidents."
+      },
+      {
+        question: "When should you report a spill?",
+        options: ["Straight away", "At home", "Next week", "Only if asked"],
+        answer: 0,
+        feedback: "Report spills straight away so the teacher can make the area safe."
+      }
+        ]
+      },
+      week2: {
+        title: "Week 2 - Cells",
+        exportTitle: "Week 2 Cells",
+        motto: "Tiny building blocks make every living thing.",
+        bitesizeText: "BBC Bitesize: Cells",
+        bitesizeUrl: "https://www.bbc.co.uk/bitesize/topics/znyycdm/articles/zkm7wnb",
+        questions: [
+          { question: "What are living things made from?", options: ["Rocks", "Cells", "Metals", "Clouds"], answer: 1, feedback: "Cells are the tiny building blocks of living things." },
+          { question: "Which part controls many cell activities?", options: ["Nucleus", "Cell wall", "Air space", "Bone"], answer: 0, feedback: "The nucleus controls many activities in the cell." },
+          { question: "Which cell part surrounds the cell?", options: ["Cell membrane", "Table", "Lens", "Root"], answer: 0, feedback: "The cell membrane surrounds the cell and controls what enters and leaves." },
+          { question: "Which cell type often has chloroplasts?", options: ["Plant", "Animal", "Blood only", "Bone only"], answer: 0, feedback: "Plant cells often contain chloroplasts for photosynthesis." },
+          { question: "What do chloroplasts help with?", options: ["Movement", "Photosynthesis", "Sound", "Heating"], answer: 1, feedback: "Chloroplasts absorb light for photosynthesis." },
+          { question: "Which tool helps us see cells?", options: ["Thermometer", "Microscope", "Stopwatch", "Magnet"], answer: 1, feedback: "Microscopes magnify tiny cells so we can see them." },
+          { question: "Cytoplasm is best described as...", options: ["Jelly-like material", "A hard shell", "A gas", "A type of light"], answer: 0, feedback: "Cytoplasm is a jelly-like material where many cell reactions happen." },
+          { question: "Which is found in plant cells but not animal cells?", options: ["Nucleus", "Cytoplasm", "Cell wall", "Membrane"], answer: 2, feedback: "Plant cells have a cell wall; animal cells do not." },
+          { question: "A tissue is made from...", options: ["Similar cells", "Only water", "One atom", "Different planets"], answer: 0, feedback: "A tissue is a group of similar cells working together." },
+          { question: "Which is the smallest here?", options: ["Organism", "Organ", "Tissue", "Cell"], answer: 3, feedback: "A cell is smaller than a tissue, organ or organism." }
+        ]
+      },
+      week3: {
+        title: "Week 3 - Working Scientifically",
+        exportTitle: "Week 3 Working Scientifically",
+        motto: "Change one thing, measure carefully, keep it fair.",
+        bitesizeText: "BBC Bitesize: Working scientifically",
+        bitesizeUrl: "https://www.bbc.co.uk/bitesize/topics/zrwvf82/articles/zxn896f",
+        questions: [
+          { question: "What is a variable?", options: ["Something that can change", "A safety rule", "A diagram", "A conclusion"], answer: 0, feedback: "A variable is something that can change in an investigation." },
+          { question: "The variable you change is called...", options: ["Dependent", "Independent", "Control", "Random"], answer: 1, feedback: "The independent variable is the one you change." },
+          { question: "The variable you measure is called...", options: ["Dependent", "Independent", "Control", "Hazard"], answer: 0, feedback: "The dependent variable is the one you measure." },
+          { question: "Why keep control variables the same?", options: ["To make it fair", "To make it shorter", "To hide results", "To use no equipment"], answer: 0, feedback: "Control variables are kept the same to make the test fair." },
+          { question: "What should results be written in?", options: ["A table", "A story", "A warning sign", "A poster only"], answer: 0, feedback: "Tables help organise results clearly." },
+          { question: "What does repeat mean?", options: ["Do it again", "Stop early", "Change everything", "Guess"], answer: 0, feedback: "Repeating means doing the measurement or test again." },
+          { question: "A prediction says...", options: ["What you think will happen", "The final mark", "The title only", "The equipment price"], answer: 0, feedback: "A prediction says what you think will happen before the test." },
+          { question: "Which unit could measure time?", options: ["Seconds", "Degrees Celsius", "Centimetres", "Grams"], answer: 0, feedback: "Seconds are a unit used to measure time." },
+          { question: "What should you do with unusual results?", options: ["Ignore secretly", "Check and repeat if possible", "Change all numbers", "Rub out the table"], answer: 1, feedback: "Unusual results should be checked and repeated if possible." },
+          { question: "A conclusion should use...", options: ["Evidence", "Only drawings", "No results", "A joke"], answer: 0, feedback: "A conclusion should use evidence from the results." }
+        ]
+      },
+      week4: {
+        title: "Week 4 - Specialised Cells",
+        exportTitle: "Week 4 Specialised Cells",
+        motto: "Shape helps cells do their jobs.",
+        bitesizeText: "BBC Bitesize: Specialised cells",
+        bitesizeUrl: "https://www.bbc.co.uk/bitesize/articles/zfj3rwx",
+        questions: [
+          { question: "A specialised cell is adapted for...", options: ["A job", "A colour only", "A desk", "A season"], answer: 0, feedback: "A specialised cell has features that help it do a particular job." },
+          { question: "Red blood cells carry...", options: ["Oxygen", "Soil", "Light", "Sound"], answer: 0, feedback: "Red blood cells carry oxygen around the body." },
+          { question: "Nerve cells carry...", options: ["Messages", "Food only", "Glass", "Heat only"], answer: 0, feedback: "Nerve cells carry electrical messages around the body." },
+          { question: "Root hair cells absorb...", options: ["Water and minerals", "Oxygen only", "Ink", "Sound"], answer: 0, feedback: "Root hair cells absorb water and minerals from soil." },
+          { question: "Sperm cells usually have a tail to help...", options: ["Movement", "Photosynthesis", "Hearing", "Cooling"], answer: 0, feedback: "A sperm cell tail helps it move." },
+          { question: "Egg cells contain food stores for...", options: ["Early development", "Making soil", "Burning fuel", "Making glass"], answer: 0, feedback: "Egg cells contain food stores for early development." },
+          { question: "A palisade cell has chloroplasts for...", options: ["Photosynthesis", "Movement", "Messages", "Protection only"], answer: 0, feedback: "Palisade cells have many chloroplasts for photosynthesis." },
+          { question: "Which cell is long and branched?", options: ["Nerve cell", "Red blood cell", "Egg cell", "Cheek cell"], answer: 0, feedback: "Nerve cells are long and branched to carry messages." },
+          { question: "Adapted means...", options: ["Suited to a job", "Always bigger", "Always red", "Not alive"], answer: 0, feedback: "Adapted means suited to a particular job or environment." },
+          { question: "Which is a plant specialised cell?", options: ["Root hair cell", "Red blood cell", "Nerve cell", "Sperm cell"], answer: 0, feedback: "A root hair cell is a specialised plant cell." }
+        ]
+      }
+    };
+
+    let currentQuizId = "week1";
+    let quiz = quizzes[currentQuizId].questions;
+
+    const questionsEl = document.querySelector("#questions");
+    const quizShellEl = document.querySelector("#quiz-shell");
+    const quizTitleEl = document.querySelector("#quiz-title");
+    const quizSelectEl = document.querySelector("#quiz-select");
+    const bitesizeLinkEl = document.querySelector("#bitesize-link");
+    const scoreEl = document.querySelector("#score");
+    const totalEl = document.querySelector("#total");
+    const scoreLabelEl = document.querySelector("#score-label");
+    const progressEl = document.querySelector("#progress");
+    const roundFeedbackEl = document.querySelector("#round-feedback");
+    const retryButton = document.querySelector("#retry");
+    const checkButton = document.querySelector("#check");
+    const sendButton = document.querySelector("#send-result");
+    const startButton = document.querySelector("#start-quiz");
+    const studentNameEl = document.querySelector("#student-name");
+    const studentClassEl = document.querySelector("#student-class");
+    const studentMessageEl = document.querySelector("#student-message");
+    const selected = new Map();
+    let activeQuestionIndices = quiz.map((_, index) => index);
+    let roundNumber = 1;
+    let missedQuestionIndices = [];
+    let currentStudent = null;
+
+    function letter(index) {
+      return String.fromCharCode(65 + index);
+    }
+
+    function renderQuiz() {
+      const quizInfo = quizzes[currentQuizId];
+      quizTitleEl.textContent = quizInfo.title;
+      bitesizeLinkEl.textContent = quizInfo.bitesizeText;
+      bitesizeLinkEl.href = quizInfo.bitesizeUrl;
+      totalEl.textContent = quiz.length;
+      questionsEl.innerHTML = "";
+      activeQuestionIndices.forEach((questionIndex, displayIndex) => {
+        const item = quiz[questionIndex];
+        const article = document.createElement("article");
+        article.className = "question";
+        article.dataset.questionIndex = questionIndex;
+        article.innerHTML = `
+          <h3>${displayIndex + 1}. ${item.question}</h3>
+          <div class="answers" role="group" aria-label="Question ${displayIndex + 1} answers"></div>
+          <div class="feedback" id="feedback-${questionIndex}"></div>
+        `;
+
+        const answers = article.querySelector(".answers");
+        item.options.forEach((option, optionIndex) => {
+          const button = document.createElement("button");
+          button.className = "answer";
+          button.type = "button";
+          button.textContent = `${letter(optionIndex)}. ${option}`;
+          button.disabled = !currentStudent;
+          button.addEventListener("click", () => chooseAnswer(questionIndex, optionIndex));
+          answers.appendChild(button);
+        });
+        questionsEl.appendChild(article);
+      });
+      setQuizLocked(!currentStudent);
+    }
+
+    function chooseAnswer(questionIndex, optionIndex) {
+      if (!currentStudent) {
+        studentMessageEl.textContent = "Please enter your name before answering.";
+        studentNameEl.focus();
+        return;
+      }
+      selected.set(questionIndex, optionIndex);
+      const question = questionsEl.querySelector(`[data-question-index="${questionIndex}"]`);
+      const buttons = question.querySelectorAll(".answer");
+      buttons.forEach((button, index) => {
+        button.classList.toggle("correct", index === quiz[questionIndex].answer);
+        button.classList.toggle("incorrect", index === optionIndex && index !== quiz[questionIndex].answer);
+      });
+      const feedback = question.querySelector(".feedback");
+      const isCorrect = optionIndex === quiz[questionIndex].answer;
+      feedback.textContent = isCorrect ? `Correct. ${quiz[questionIndex].feedback}` : `Not quite. ${quiz[questionIndex].feedback}`;
+      updateScore();
+    }
+
+    function updateScore() {
+      let score = 0;
+      selected.forEach((optionIndex, questionIndex) => {
+        if (quiz[questionIndex].answer === optionIndex) {
+          score += 1;
+        }
+      });
+      scoreEl.textContent = score;
+      progressEl.style.width = `${(score / quiz.length) * 100}%`;
+      const selectedInThisRound = activeQuestionIndices.filter((questionIndex) => selected.has(questionIndex)).length;
+      if (selected.size === 0 || selectedInThisRound === 0) {
+        scoreLabelEl.textContent = roundNumber === 1 ? "Have a go" : `Round ${roundNumber}`;
+      } else if (score === quiz.length) {
+        scoreLabelEl.textContent = `${quiz.length}/${quiz.length} - excellent work`;
+      } else if (score >= 7) {
+        scoreLabelEl.textContent = "Nearly there";
+      } else if (score >= 4) {
+        scoreLabelEl.textContent = "Keep practising";
+      } else {
+        scoreLabelEl.textContent = "Use the key information";
+      }
+    }
+
+    function checkAll() {
+      if (!currentStudent) {
+        studentMessageEl.textContent = "Please enter your name before checking answers.";
+        studentNameEl.focus();
+        return;
+      }
+      activeQuestionIndices.forEach((questionIndex) => {
+        const item = quiz[questionIndex];
+        const question = questionsEl.querySelector(`[data-question-index="${questionIndex}"]`);
+        const buttons = question.querySelectorAll(".answer");
+        buttons[item.answer].classList.add("correct");
+        if (!selected.has(questionIndex)) {
+          question.querySelector(".feedback").textContent = `Have another look. Correct answer: ${letter(item.answer)}. ${item.feedback}`;
+        } else if (selected.get(questionIndex) !== item.answer) {
+          question.querySelector(".feedback").textContent = `Not yet. Correct answer: ${letter(item.answer)}. ${item.feedback}`;
+        }
+      });
+      missedQuestionIndices = quiz
+        .map((item, questionIndex) => ({ item, questionIndex }))
+        .filter(({ item, questionIndex }) => selected.get(questionIndex) !== item.answer)
+        .map(({ questionIndex }) => questionIndex);
+      updateScore();
+      showRoundFeedback();
+      prepareTeacherEmail();
+    }
+
+    function showRoundFeedback() {
+      const score = Number(scoreEl.textContent);
+      if (score === quiz.length) {
+        retryButton.hidden = true;
+        roundFeedbackEl.innerHTML = `<strong>Brilliant - ${quiz.length}/${quiz.length}.</strong><br>You have checked every answer and shown excellent knowledge.`;
+        return;
+      }
+
+      const missedList = missedQuestionIndices
+        .map((questionIndex) => `<li>Question ${questionIndex + 1}: ${quiz[questionIndex].feedback}</li>`)
+        .join("");
+      retryButton.hidden = false;
+      roundFeedbackEl.innerHTML = `
+        <strong>You scored ${score}/${quiz.length}.</strong><br>
+        Good effort. Read the feedback below, then try another round with only the questions to improve.
+        <ul>${missedList}</ul>
+      `;
+    }
+
+    function startRetryRound() {
+      if (!currentStudent) {
+        studentMessageEl.textContent = "Please enter your name before trying another round.";
+        studentNameEl.focus();
+        return;
+      }
+      if (missedQuestionIndices.length === 0) {
+        return;
+      }
+      roundNumber += 1;
+      activeQuestionIndices = [...missedQuestionIndices];
+      missedQuestionIndices.forEach((questionIndex) => selected.delete(questionIndex));
+      missedQuestionIndices = [];
+      retryButton.hidden = true;
+      sendButton.hidden = true;
+      roundFeedbackEl.innerHTML = `<strong>Round ${roundNumber}:</strong> Try these questions again. Use the feedback to help you reach 10/10.`;
+      renderQuiz();
+      updateScore();
+    }
+
+    function resetQuiz() {
+      selected.clear();
+      quiz = quizzes[currentQuizId].questions;
+      activeQuestionIndices = quiz.map((_, index) => index);
+      roundNumber = 1;
+      missedQuestionIndices = [];
+      retryButton.hidden = true;
+      sendButton.hidden = true;
+      roundFeedbackEl.innerHTML = "";
+      currentStudent = null;
+      studentNameEl.disabled = false;
+      studentClassEl.disabled = false;
+      quizSelectEl.disabled = false;
+      studentNameEl.value = "";
+      studentClassEl.value = "";
+      studentMessageEl.textContent = "Choose a quiz and enter your name to unlock it.";
+      renderQuiz();
+      updateScore();
+    }
+
+    function startQuiz() {
+      const name = studentNameEl.value.trim();
+      const className = studentClassEl.value.trim();
+      if (!name) {
+        studentMessageEl.textContent = "Student name is required before the quiz can start.";
+        studentNameEl.focus();
+        return;
+      }
+      currentQuizId = quizSelectEl.value;
+      quiz = quizzes[currentQuizId].questions;
+      currentStudent = { name, className };
+      studentNameEl.disabled = true;
+      studentClassEl.disabled = true;
+      quizSelectEl.disabled = true;
+      studentMessageEl.textContent = `${quizzes[currentQuizId].title} unlocked for ${name}.`;
+      selected.clear();
+      activeQuestionIndices = quiz.map((_, index) => index);
+      roundNumber = 1;
+      missedQuestionIndices = [];
+      retryButton.hidden = true;
+      sendButton.hidden = true;
+      roundFeedbackEl.innerHTML = "";
+      renderQuiz();
+      updateScore();
+    }
+
+    function changeQuiz() {
+      currentQuizId = quizSelectEl.value;
+      quiz = quizzes[currentQuizId].questions;
+      currentStudent = null;
+      selected.clear();
+      activeQuestionIndices = quiz.map((_, index) => index);
+      roundNumber = 1;
+      missedQuestionIndices = [];
+      retryButton.hidden = true;
+      sendButton.hidden = true;
+      roundFeedbackEl.innerHTML = "";
+      studentNameEl.disabled = false;
+      studentClassEl.disabled = false;
+      studentMessageEl.textContent = "Enter your name to unlock the selected quiz.";
+      renderQuiz();
+      updateScore();
+    }
+
+    function setQuizLocked(isLocked) {
+      quizShellEl.classList.toggle("quiz-locked", isLocked);
+      checkButton.disabled = isLocked;
+      retryButton.disabled = isLocked;
+      sendButton.disabled = isLocked;
+      questionsEl.querySelectorAll("button.answer").forEach((button) => {
+        button.disabled = isLocked;
+      });
+    }
+
+    function currentScore() {
+      let score = 0;
+      quiz.forEach((item, questionIndex) => {
+        if (selected.get(questionIndex) === item.answer) {
+          score += 1;
+        }
+      });
+      return score;
+    }
+
+    function prepareTeacherEmail() {
+      const score = currentScore();
+      const subject = `${quizzes[currentQuizId].title} result`;
+      const body = `Student Name: ${currentStudent.name}\nScore: ${score}/${quiz.length}`;
+      sendButton.dataset.mailto = `mailto:wforbes@tcat.school?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      sendButton.hidden = false;
+      studentMessageEl.textContent = "Result ready to send to teacher.";
+    }
+
+    function sendResultToTeacher() {
+      if (!sendButton.dataset.mailto) {
+        roundFeedbackEl.innerHTML = "<strong>No result ready yet.</strong><br>Check the quiz before sending.";
+        return;
+      }
+      window.location.href = sendButton.dataset.mailto;
+    }
+
+    startButton.addEventListener("click", startQuiz);
+    quizSelectEl.addEventListener("change", changeQuiz);
+    studentNameEl.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        startQuiz();
+      }
+    });
+    checkButton.addEventListener("click", checkAll);
+    retryButton.addEventListener("click", startRetryRound);
+    sendButton.addEventListener("click", sendResultToTeacher);
+    document.querySelector("#reset").addEventListener("click", resetQuiz);
+
+    renderQuiz();
+    updateScore();
+  </script>
+</body>
+</html>
